@@ -33,9 +33,11 @@ jobs:
         with:
           ref: main
 
-      # .fvm/fvm_config.json から情報を取得
+      # fvm から Flutter 情報を取得
       - name: fetch flutter info
-        uses: kuhnroyal/flutter-fvm-config-action@v1
+        run: |
+          FLUTTER_VERSION=$(fvm doctor | grep "Version" | awk -F': ' '{print $2}')
+          echo "FLUTTER_VERSION=$FLUTTER_VERSION" >> $GITHUB_ENV
 
       # Flutter のキャッシュを設定
       - name: cache flutter
@@ -43,7 +45,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/fvm/versions/${{ env.FLUTTER_VERSION }}
-          key: ${{ env.FLUTTER_CHANNEL }}-${{ env.FLUTTER_VERSION }}
+          key: ${{ env.FLUTTER_VERSION }}
 
       # .fvm/fvm_config.json で指定された Flutter をインストール
       - name: install flutter
