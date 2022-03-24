@@ -26,9 +26,21 @@ jobs:
         with:
           ref: main
 
+      # .fvm/fvm_config.json から情報を取得
+      - name: fetch flutter info
+        uses: kuhnroyal/flutter-fvm-config-action@v1
 
-      # .fvm/fvm_config.json に指定された Flutter をインストール
-      - name: setup flutter
+      # Flutter のキャッシュを設定
+      - name: cache flutter
+        id: cache_flutter
+        uses: actions/cache@v2
+        with:
+          path: .fvm/flutter_sdk
+          key: ${{ env.FLUTTER_CHANNEL }}-${{ env.FLUTTER_VERSION }}
+
+      # .fvm/fvm_config.json で指定された Flutter をインストール
+      - name: install flutter
+        if: steps.cache_flutter.outputs.cache-hit != 'true'
         run: fvm install
 
       # フォーマットを実行
