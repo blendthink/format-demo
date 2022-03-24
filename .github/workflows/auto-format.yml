@@ -21,6 +21,7 @@ jobs:
 
     steps:
 
+      # 利用している Docker イメージ（leoafarias/fvm）で Git がインストールされているため、再設定が必要
       - name: setup git
         run: |
           git config --global user.email "${{ github.actor }}@users.noreply.github.com"
