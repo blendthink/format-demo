@@ -36,7 +36,7 @@ jobs:
       # fvm から Flutter 情報を取得
       - name: fetch flutter info
         run: |
-          version=$(fvm doctor | grep "Version" | awk -F': ' '{print $2}')
+          version=$(fvm doctor | grep "^Version: " | awk -F': ' '{print $2}')
           flutter_version=$(echo $version | awk -F'@' '{print $1}')
           flutter_channel=$(echo $version | awk -F'@' '{print $2}')
           if [ -z $flutter_channel ]; then
