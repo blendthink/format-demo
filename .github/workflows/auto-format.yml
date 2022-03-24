@@ -20,6 +20,12 @@ jobs:
     timeout-minutes: 5
 
     steps:
+
+      - name: setup git
+        run: |
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+          git config --global user.name "${{ github.actor }}"
+
       # main ブランチにチェックアウトして自動フォーマットする
       - name: checkout
         uses: actions/checkout@v2
