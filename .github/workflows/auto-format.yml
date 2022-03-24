@@ -41,7 +41,7 @@ jobs:
         id: cache_flutter
         uses: actions/cache@v2
         with:
-          path: .fvm/flutter_sdk
+          path: $HOME/fvm/versions/${{ env.FLUTTER_VERSION }}
           key: ${{ env.FLUTTER_CHANNEL }}-${{ env.FLUTTER_VERSION }}
 
       # .fvm/fvm_config.json で指定された Flutter をインストール
