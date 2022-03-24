@@ -64,7 +64,7 @@ jobs:
 
       # 変更が発生した場合は main ブランチに向けてプルリクエストを作成
       - name: create pull request
-        uses: peter-evans/create-pull-request@v3.11.0
+        uses: peter-evans/create-pull-request@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: auto format
